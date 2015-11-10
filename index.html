@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="./js/amcharts.js"></script>
+<script src="http://www.amcharts.com/lib/3/gauge.js"></script>
+<script src="http://www.amcharts.com/lib/3/themes/light.js"></script>
+<script src="https://cdn.jsdelivr.net/bluebird/3.0.5/bluebird.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.4/handlebars.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.5.0/fabric.min.js"></script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+</head>
+<script src="./drawer.js"></script>
+<script src="./game.js"></script>
+<script src="./stage.js"></script>
+<script id="stat-template" type="text/x-handlebars-template">
+	<h3>{{title}}</h3>
+	<h4>{{num}}/{{all}}</h4>
+</script>
+<script id="stage-template" type="text/x-handlebars-template">
+  <div>
+    <h1>問題{{index}}</h1>
+    <section class="sec1">
+    	<canvas id="stage-{{index}}-canvas" class="stage-canvas"></canvas>
+    </section>
+    <section class="sec2">
+	    <div class="gauge-div" id="gauge-one-{{index}}" ></div>
+	    <div class="gauge-div" id="gauge-two-{{index}}"></div>
+    </section>
+  </div>
+</script>
+<script id="ask-template" type="text/x-handlebars-template">
+  <div>
+    <h1>問題{{index}}</h1>
+    <form id="ask-form">
+	  <div class="form-group">
+	    <label for="rect-input">幾個正方形</label>
+	    <input type="text" class="form-control" id="rect-input" placeholder="正方形">
+	  </div>
+	  <div class="form-group">
+	    <label for="tris-input">幾個三角形</label>
+	    <input type="text" class="form-control" id="tris-input" placeholder="三角形">
+	  </div>
+	  <div class="form-group">
+	    <label for="gauge-1-input">第一個指針多少？</label>
+	    <input type="text" class="form-control" id="gauge-1-input" placeholder="指針1">
+	  </div>
+	  <div class="form-group">
+	    <label for="gauge-2-input">第二個指針多少？</label>
+	    <input type="text" class="form-control" id="gauge-2-input" placeholder="指針2">
+	  </div>
+	  <button id="ask-submit" type="submit" class="btn btn-default">提交</button>
+	</form>
+  </div>
+</script>
+<style type="text/css">
+
+canvas{
+	width: 100%;
+}
+.sec1 {
+	width: 100%;
+	height: 100px;
+}
+.sec2 {
+	width: 100%;
+	height: 400px;
+}
+.lower-canvas .stage-canvas {
+	width: 800px;
+	height: 300px;
+}
+.gauge-div {
+	width: 40%;
+	height: 300px;
+	display: inline-block;
+}
+</style>
+<script type="text/javascript">
+$(document).ready(function () {
+	var game= new Game({
+		// how many questions
+		TOTAL_QUES: 2,
+
+		// in ms
+		TIME_TO_STAY: 3000, 
+		
+		// range for tris
+		TRI_RANGE: [1,5],
+
+		// range for squares
+		SQ_RANGE: [1,5]
+	});
+
+	$("#start").click(function (e) {
+		// start the game
+		game.start();
+	})	
+})
+</script>
+<body>
+	<div id="main" class="container">
+		<div class="page-header">
+			<h1>little game</h1>
+		</div>
+		<div class="row">
+		<button id="start" type="button" class="btn btn-lg btn-primary">Start</button>
+		</div>
+	</div>
+</body>
+</html>
