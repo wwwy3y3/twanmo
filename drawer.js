@@ -19,7 +19,7 @@ Drawer.prototype.drawRects = function(num) {
 		var shape = new fabric.Rect({
 		  left: self.left,
 		  top: self.top,
-		  fill: 'blue',
+		  fill: 'black',
 		  width: 50,
 		  height: 50
 		});
@@ -40,7 +40,7 @@ Drawer.prototype.drawTris = function(num) {
 		var shape = new fabric.Triangle({
 		  left: self.left,
 		  top: self.top,
-		  fill: 'blue',
+		  fill: 'black',
 		  width: 50,
 		  height: 50
 		});
